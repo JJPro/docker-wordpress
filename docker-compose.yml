@@ -1,0 +1,39 @@
+version: '3'
+
+services:
+  wordpress:
+    image: bitnami/wordpress:latest
+    container_name: wordpress
+    ports:
+      - 8080:8080
+    restart: unless-stopped
+    volumes:
+      - wordpress_data:/bitnami/wordpress
+      # - /docker/appdata/wordpress-dev/themes/justnews:/bitnami/wordpress/wp-content/themes/justnews
+      # - /docker/appdata/wordpress-dev/plugins/justweapp:/bitnami/wordpress/wp-content/plugins/justweapp
+      # - /docker/appdata/wordpress-dev/plugins/qapress:/bitnami/wordpress/wp-content/plugins/qapress
+    depends_on:
+      - mariadb
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+      - WORDPRESS_DATABASE_HOST=mariadb
+      - WORDPRESS_DATABASE_PORT_NUMBER=3306
+      - WORDPRESS_DATABASE_USER=bn_wordpress
+      - WORDPRESS_DATABASE_PASSWORD=bn_wordpress
+      - WORDPRESS_DATABASE_NAME=bitnami_wordpress
+
+  mariadb:
+    image: bitnami/mariadb:10.6
+    container_name: wordpress-db
+    restart: unless-stopped
+    environment:
+      - MARIADB_PASSWORD=bn_wordpress
+      - MARIADB_USER=bn_wordpress
+      - MARIADB_DATABASE=bitnami_wordpress
+      - MARIADB_ROOT_PASSWORD=G8W4A5%
+    volumes:
+      - db:/bitnami/mariadb
+
+volumes:
+  db:
+  wordpress_data:
