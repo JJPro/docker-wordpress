@@ -21,7 +21,9 @@ RUN chmod +x /usr/local/bin/install-php-extensions; \
 ## Xdebug
 RUN {\
         echo 'zend_extension=xdebug.so'; \
-        echo 'xdebug.mode=debug,develop ; develop: prettier `var_dump`, debug: enables step debugger'; \
+        echo 'xdebug.mode=debug,develop; develop: prettier `var_dump`, debug: enables step debugger'; \
+        echo 'xdebug.start_with_request = yes;'; \
+        echo 'xdebug.client_host = host.docker.internal;'; \
     } > /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
 
 # Configure PHP Environment 
