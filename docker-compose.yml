@@ -17,7 +17,7 @@ services:
       - wordpress_data:/var/www/html
       - ./post-install.dev.sh:/var/www/post-install.dev.sh
       - ./www.conf:/usr/local/etc/php-fpm.d/www.conf
-      - ~/Documents/testbed/nucssa/nucssa-core:/var/www/html/wp-content/plugins/nucssa-core
+      - ~/Documents/testbed/nucssa/nucssa-core:/var/www/html/wp-content/plugins/nucssa-core:ro
     depends_on:
       - mariadb
     environment:

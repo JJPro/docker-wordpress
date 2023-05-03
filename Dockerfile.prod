@@ -4,7 +4,7 @@ FROM wordpress:fpm
 # APT TOOLS #
 #############
 RUN set -ex; \
-    apt-get update && apt-get install -y sendmail less; \ 
+    apt-get update && apt-get install -y sendmail libldap2-dev less; \ 
     apt-get purge -y --auto-remove; \
     rm -rf /var/lib/apt/lists/*
 
@@ -15,7 +15,7 @@ RUN set -ex; \
 # Install PHP Extensions
 ADD https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions /usr/local/bin/
 RUN chmod +x /usr/local/bin/install-php-extensions; \
-    install-php-extensions memcached
+    install-php-extensions memcached ldap
 
 # Configure PHP Environment 
 COPY php.ini-production $PHP_INI_DIR/conf.d/custom.ini
