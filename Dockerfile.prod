@@ -18,7 +18,7 @@ RUN chmod +x /usr/local/bin/install-php-extensions; \
     install-php-extensions memcached ldap calendar gettext pdo_mysql sockets xsl
 
 # Configure PHP Environment 
-COPY php.ini-production $PHP_INI_DIR/conf.d/custom.ini
+COPY ./conf/php/php.ini-production $PHP_INI_DIR/conf.d/custom.ini
 
 ###############
 # OTHER TOOLS #

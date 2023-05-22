@@ -15,9 +15,9 @@ services:
     restart: unless-stopped
     volumes: 
       - wordpress_data:/var/www/html
-      - ./post-install.dev.sh:/var/www/post-install.dev.sh
-      - ./www.conf:/usr/local/etc/php-fpm.d/www.conf
-      - _path_to_plugin_dir_:/var/www/html/wp-content/plugins/nucssa-core:ro # TODO change bind volume to your plugin dir for local development 
+      - ./scripts/post-install.dev.sh:/var/www/post-install.dev.sh
+      - ./conf/php/php-fpm.conf:/usr/local/etc/php-fpm.d/www.conf
+      # - _path_to_plugin_dir_:/var/www/html/wp-content/plugins/nucssa-core:ro # TODO change bind volume to your plugin dir for local development 
     depends_on:
       - mariadb
     environment:
@@ -60,7 +60,7 @@ services:
     ports: 
       - 8080:80
     volumes:
-      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+      - ./conf/nginx/nginx.conf:/etc/nginx/conf.d/default.conf
     volumes_from:
       - wordpress
   
